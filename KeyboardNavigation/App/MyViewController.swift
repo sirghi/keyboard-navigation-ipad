@@ -1,23 +1,9 @@
 
 import UIKit
-enum Pages: CaseIterable {
-    case zero
-    case one
 
-    var index: Int {
-        switch self {
-        case .zero: 0
-        case .one: 1
-        }
-    }
-}
-
-class MyViewController: UIViewController, UIPageViewControllerDataSource {
-    private var pages: [Pages] = Pages.allCases
-
+class MyViewController: UIViewController {
     lazy var pager: UIPageViewController = {
-        let pager = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .vertical)
-        pager.dataSource = self
+        let pager = FocusablePageViewController(transitionStyle: .scroll, navigationOrientation: .vertical)
         pager.view.backgroundColor = .green
         return pager
     }()
@@ -27,8 +13,6 @@ class MyViewController: UIViewController, UIPageViewControllerDataSource {
         self.view.backgroundColor = .gray
         addChild(pager)
         view.addSubview(pager.view)
-        let initialVC = PageViewController(with: pages[0])
-        pager.setViewControllers([initialVC], direction: .forward, animated: true)
         pager.didMove(toParent: self)
         pager.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -37,29 +21,6 @@ class MyViewController: UIViewController, UIPageViewControllerDataSource {
             pager.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             pager.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // We put here a breakpoint and inspect focusability with UIFocusDebugger
-    }
-
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let currentVC = viewController as? PageViewController else { return nil }
-        var index = currentVC.page.index
-        if index == 0 { return nil }
-        index -= 1
-        let vc = PageViewController(with: pages[index])
-        return vc
-    }
-
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let currentVC = viewController as? PageViewController else { return nil }
-        var index = currentVC.page.index
-        if index >= self.pages.count - 1 { return nil }
-        index += 1
-        let vc = PageViewController(with: pages[index])
-        return vc
     }
 }
 
@@ -78,26 +39,31 @@ class PageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.backgroundColor = .white
-        let focusableView = FocusableView()
-        focusableView.focusGroupIdentifier = "focusable.view"
-        focusableView.backgroundColor = .red
-        view.addSubview(focusableView)
-        focusableView.translatesAutoresizingMaskIntoConstraints = false
 
-        let label = UILabel()
-        label.text = "Index: \(page.index)"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        focusableView.addSubview(label)
+        let focusableView1 = FocusableView()
+        focusableView1.focusGroupIdentifier = "focusable.view"
+        focusableView1.backgroundColor = .red
+        focusableView1.translatesAutoresizingMaskIntoConstraints = false
+
+        let focusableView2 = FocusableView()
+        focusableView2.focusGroupIdentifier = "focusable.view"
+        focusableView2.backgroundColor = .green
+        focusableView2.translatesAutoresizingMaskIntoConstraints = false
+
+        let stack = UIStackView(arrangedSubviews: [focusableView1, focusableView2])
+        stack.axis = .vertical
+        stack.spacing = 20
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stack)
 
         NSLayoutConstraint.activate([
-            focusableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            focusableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            focusableView.heightAnchor.constraint(equalToConstant: 200),
-            focusableView.widthAnchor.constraint(equalToConstant: 200),
-            label.centerXAnchor.constraint(equalTo: focusableView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: focusableView.centerYAnchor),
+            focusableView1.heightAnchor.constraint(equalToConstant: 200),
+            focusableView1.widthAnchor.constraint(equalToConstant: 200),
+            focusableView2.heightAnchor.constraint(equalToConstant: 200),
+            focusableView2.widthAnchor.constraint(equalToConstant: 200),
+            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
 }

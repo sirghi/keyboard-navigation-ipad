@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34EA302B2C9D55EE002BB7CF /* FocusablePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EA302A2C9D55EE002BB7CF /* FocusablePageVC.swift */; };
 		53508749264EBC7E00C3F417 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53508747264EBC7E00C3F417 /* InfoPlist.strings */; };
 		672D8576261E86F70053248B /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672D8575261E86F70053248B /* MyViewController.swift */; };
 		679F76702620BDE0008A9AB7 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F766F2620BDE0008A9AB7 /* FocusableView.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		34EA302A2C9D55EE002BB7CF /* FocusablePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusablePageVC.swift; sourceTree = "<group>"; };
 		53508748264EBC7E00C3F417 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		672D8575261E86F70053248B /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		679F766F2620BDE0008A9AB7 /* FocusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableView.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				67F88E75261E622500C915C5 /* SceneDelegate.swift */,
 				672D8575261E86F70053248B /* MyViewController.swift */,
 				679F766F2620BDE0008A9AB7 /* FocusableView.swift */,
+				34EA302A2C9D55EE002BB7CF /* FocusablePageVC.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				672D8576261E86F70053248B /* MyViewController.swift in Sources */,
 				679F76702620BDE0008A9AB7 /* FocusableView.swift in Sources */,
 				67F88E76261E622500C915C5 /* SceneDelegate.swift in Sources */,
+				34EA302B2C9D55EE002BB7CF /* FocusablePageVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
